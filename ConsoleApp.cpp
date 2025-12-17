@@ -3,6 +3,9 @@
 
 int main()
 {
-    clsLoginScreen::ShowLoginScreen();
+    while (true)
+    {
+        clsLoginScreen::ShowLoginScreen();    clsLoginScreen::ShowLoginScreen();
+    }
     return 0;
 }
