@@ -6,6 +6,7 @@
 #include "clsUsersListScreen.h"
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
+#include "clsUpdateUserScreen.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -88,12 +89,13 @@ private:
     static void _ShowDeleteUserScreen()
     {
         // cout << "\nDelete Users Screen Will Be Here....\n";
-        clsDeleteClientScreen::ShowDeleteClientScreen();
+        clsDeleteUserScreen::ShowDeleteUserScreen();
     }
 
     static void _ShowUpdateUserScreen()
     {
-        cout << "\nUpdate Usres Screen Will Be Here....\n";
+        // cout << "\nUpdate Usres Screen Will Be Here....\n";
+        clsUpdateUserScreen::ShowUpdateUserScreen();
     }
 
     static void _ShowFindUsersScreen()

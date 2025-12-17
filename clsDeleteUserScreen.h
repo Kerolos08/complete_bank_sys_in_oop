@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class clsDeleteClientScreen : protected clsScreen
+class clsDeleteUserScreen : protected clsScreen
 {
 private:
     static void _PrintUser(const clsUser &User)
@@ -25,9 +25,9 @@ private:
     }
 
 public:
-    static void ShowDeleteClientScreen()
+    static void ShowDeleteUserScreen()
     {
-        _DrawScreenHeader("\t  Delete Client Screen");
+        _DrawScreenHeader("\t  Delete User Screen");
 
         string Username = "";
         cout << "\nPlease Enter Username: ";
