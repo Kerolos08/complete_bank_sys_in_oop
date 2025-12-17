@@ -7,6 +7,7 @@
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -100,7 +101,8 @@ private:
 
     static void _ShowFindUsersScreen()
     {
-        cout << "\nFind Usres Screen Will Be Here....\n";
+        // cout << "\nFind Usres Screen Will Be Here....\n";
+        clsFindUserScreen::ShowFindUserScreen();
     }
 
     static void _PerformManageUsersMenuOption(enManageUsersMenuOption ManageUsersOption)
