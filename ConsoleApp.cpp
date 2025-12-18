@@ -5,7 +5,7 @@ int main()
 {
     while (true)
     {
-        clsLoginScreen::ShowLoginScreen();    clsLoginScreen::ShowLoginScreen();
+        clsLoginScreen::ShowLoginScreen();
     }
     return 0;
 }
