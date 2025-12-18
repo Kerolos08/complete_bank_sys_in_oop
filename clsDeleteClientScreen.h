@@ -35,6 +35,13 @@ private:
 public:
     static void ShowDeleteClientScreen()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pDeleteClient))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         clsScreen::_DrawScreenHeader("\t  Delete Client Screen");
 
         string AccountNumber = _ReadAccountNumber();

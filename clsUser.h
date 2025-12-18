@@ -278,4 +278,12 @@ public:
     {
         return clsUser(enMode::AddNewMode, "", "", "", "", Username, "", 0);
     }
+
+    bool CheckAccessPermissions(eMainMenuPermissions Permission)
+    {
+        if (this->Get_Permissions() == eMainMenuPermissions::pAll)
+            return true;
+
+        return ((this->Get_Permissions() & Permission) == Permission);
+    }
 };

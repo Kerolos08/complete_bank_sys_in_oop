@@ -57,6 +57,13 @@ private:
 public:
     static void ShowAddNewClientScreen()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pAddNewClient))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         clsScreen::_DrawScreenHeader("\tAdd New Client Screen");
         string AccountNumber = _ReadAccountNumber();
         {

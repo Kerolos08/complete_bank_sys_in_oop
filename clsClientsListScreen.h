@@ -22,6 +22,13 @@ private:
 public:
     static void ShowClientsList()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pListClients))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         vector<clsBankClient> vClients = clsBankClient::GetClientsList();
         string Title = "\t  Clients List Screen";
         string SubTitle = "\t      (" + to_string(vClients.size()) + ") Client(s).";

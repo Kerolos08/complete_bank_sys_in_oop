@@ -148,6 +148,13 @@ private:
 public:
     static void ShowManageUsersMenu()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pManageUsers))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         bool ReturnToMainMenu = false; // initial condition to start the loop.
         while (!ReturnToMainMenu)
         {

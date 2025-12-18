@@ -124,6 +124,13 @@ private:
 public:
     static void ShowTransactionMenu()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pTransactions))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         bool ReturnToMainMenu = false; // initial condition to start the loop.
         while (!ReturnToMainMenu)
         {

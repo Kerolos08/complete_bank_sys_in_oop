@@ -36,6 +36,13 @@ private:
 public:
     static void ShowFindClientScreen()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pFindClient))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         _DrawScreenHeader("\t      Find Client");
         string AccountNumber = _ReadAccountNumber();
         while (!clsBankClient::IsClientExist(AccountNumber))

@@ -56,6 +56,13 @@ private:
 public:
     static void ShowUpdateClientScreen()
     {
+
+        if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pUpdateClientInfo))
+        {
+            return;
+            // printing Access Denied and returning to main menu without doing nothing.
+        }
+
         clsScreen::_DrawScreenHeader("\t  Update Client Screen");
         string AccountNumber = _ReadAccountNumber();
 
