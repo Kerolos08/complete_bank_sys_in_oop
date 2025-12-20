@@ -13,6 +13,7 @@ class clsTime
 private:
     short _CurrentHour;
     short _CurrentMin;
+    short _CurrentSec;
 
 public:
     void Set_CurrentHour(short Hour)
@@ -20,7 +21,7 @@ public:
         _CurrentHour = Hour;
     }
 
-    short Get_CurrentHour() const
+    short Get_CurrentHour()
     {
         return _CurrentHour;
     }
@@ -30,15 +31,26 @@ public:
         _CurrentMin = Min;
     }
 
-    short Get_CurrentMin() const
+    short Get_CurrentMin()
     {
         return _CurrentMin;
     }
 
-    clsTime(short Hour, short Min)
+    void Set_CurrentSec(short Sec)
+    {
+        _CurrentSec = Sec;
+    }
+
+    short Get_CurrentSec()
+    {
+        return _CurrentSec;
+    }
+
+    clsTime(short Hour, short Min, short Sec)
     {
         _CurrentHour = Hour;
         _CurrentMin = Min;
+        _CurrentSec = Sec;
     }
 
     clsTime()
@@ -50,14 +62,20 @@ public:
     {
         time_t t = time(0);
         tm *now = localtime(&t);
-        short Hour, Min;
+        short Hour, Min, Sec;
         Hour = now->tm_hour;
         Min = now->tm_min;
-        return clsTime(Hour, Min);
+        Sec = now->tm_sec;
+        return clsTime(Hour, Min, Sec);
+    }
+
+    void Print()
+    {
+        cout << TimeToString(*this) << endl;
     }
 
     static string TimeToString(clsTime Time)
     {
-        return to_string(Time.Get_CurrentHour()) + ":" + to_string(Time.Get_CurrentMin());
+        return to_string(Time.Get_CurrentHour()) + ":" + to_string(Time.Get_CurrentMin()) + ":" + to_string(Time.Get_CurrentSec());
     }
 };

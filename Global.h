@@ -1,3 +1,4 @@
+#pragma once
 #include "clsUser.h"
 
 clsUser ActiveUser = clsUser::Find("", "");

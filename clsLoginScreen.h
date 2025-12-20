@@ -53,6 +53,7 @@ private:
 
         } while (Loginfailed);
 
+        ActiveUser.RegisterLogin();
         clsMainScreen::ShowMainMenu();
         return true;
     }

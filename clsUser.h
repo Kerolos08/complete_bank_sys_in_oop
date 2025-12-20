@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
+#include "clsDate.h"
+#include "clsTime.h"
 #include "clsString.h"
 #include <vector>
 #include "clsPerson.h"
@@ -10,6 +11,10 @@ using namespace std;
 
 class clsUser : public clsPerson
 {
+public:
+    // to avoid the undefined structure issue
+    struct stLoginRegisterRecord;
+
 private:
     enum enMode
     {
@@ -23,7 +28,18 @@ private:
     string _Password;
     int _Permissions;
 
-    static clsUser _ConvertLineToUserObject(const string &Line, const string &Delim)
+    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(const string &Line, const string &Delim = "#//#")
+    {
+        stLoginRegisterRecord Record;
+        vector<string> vSession = clsString::SplitString(Line, Delim);
+        Record.TimeStamp = vSession.at(0);
+        Record.Username = vSession.at(1);
+        Record.Password = vSession.at(2);
+        Record.Permissions = stoi(vSession.at(3));
+        return Record;
+    }
+
+    static clsUser _ConvertLineToUserObject(const string &Line, const string &Delim = "#//#")
     {
         vector<string> vUser;
         vUser = clsString::SplitString(Line, Delim);
@@ -46,12 +62,22 @@ private:
             string Line;
             while (getline(MyFile, Line))
             {
-                clsUser User = _ConvertLineToUserObject(Line, "#//#");
+                clsUser User = _ConvertLineToUserObject(Line);
                 vUsers.push_back(User);
             }
             MyFile.close();
         }
         return vUsers;
+    }
+
+    string _PrepareLoginRecord(const string &Delim = "#//#")
+    {
+        string stRegisteryline = "";
+        stRegisteryline += clsDate::DateToString(clsDate()) + " - " + clsTime::TimeToString(clsTime()) + Delim;
+        stRegisteryline += Get_Username() + Delim;
+        stRegisteryline += Get_Password() + Delim;
+        stRegisteryline += to_string(Get_Permissions());
+        return stRegisteryline;
     }
 
     static string _ConvertUserObjectToLine(const clsUser &User, const string &Delim = "#//#")
@@ -114,6 +140,14 @@ private:
     }
 
 public:
+    struct stLoginRegisterRecord
+    {
+        string TimeStamp;
+        string Username;
+        string Password;
+        short Permissions;
+    };
+
     enum eMainMenuPermissions
     {
         pAll = -1,
@@ -124,6 +158,7 @@ public:
         pFindClient = 16,
         pTransactions = 32,
         pManageUsers = 64,
+        PLoginRegister = 128
     };
 
     clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, string Username, string Password, int Permissions) : clsPerson(FirstName, LastName, Email, Phone)
@@ -285,5 +320,37 @@ public:
             return true;
 
         return ((this->Get_Permissions() & Permission) == Permission);
+    }
+
+    void RegisterLogin()
+    {
+        // Writing the current object to the register file.
+        string stRegisteryline = _PrepareLoginRecord();
+        fstream MyFile;
+        MyFile.open("LoginRegister.txt", ios::out | ios::app);
+        if (MyFile.is_open())
+        {
+            MyFile << stRegisteryline << endl;
+            MyFile.close();
+        }
+    }
+
+    static vector<stLoginRegisterRecord> GetLoginRegisterList()
+    {
+        vector<stLoginRegisterRecord> vLoginRegisterRecords;
+        fstream MyFile;
+        MyFile.open("LoginRegister.txt", ios::in); // Read Only
+        if (MyFile.is_open())
+        {
+            string Line;
+            stLoginRegisterRecord Session;
+            while (getline(MyFile, Line))
+            {
+                Session = _ConvertLoginRegisterLineToRecord(Line);
+                vLoginRegisterRecords.push_back(Session);
+            }
+            MyFile.close();
+        }
+        return vLoginRegisterRecords;
     }
 };

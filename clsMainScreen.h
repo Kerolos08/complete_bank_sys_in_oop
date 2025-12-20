@@ -10,6 +10,8 @@
 #include "clsFindClientscreen.h"
 #include "clsTransactionsScreen.h"
 #include "clsManageUsersScreen.h"
+#include "clsLoginRegisterScreen.h"
+#include "Global.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -34,7 +36,8 @@ private:
         eFindClient = 5,
         eTransactions = 6,
         eManageUsers = 7,
-        eExit = 8
+        eLoginRegister = 8,
+        eLogout = 9
     };
 
     // cross platform Pause/clear
@@ -68,8 +71,8 @@ private:
     static short _ReadMainMenuOption()
     {
         // uses a function to make the user only can input between the Menu range
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 8]? ";
-        short Choice = clsInputValidate::ReadshortNumberbetween(1, 8, "Enter a number between 1 and 8? ");
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 9]? ";
+        short Choice = clsInputValidate::ReadshortNumberbetween(1, 9, "Enter a number between 1 and 9? ");
         return Choice;
     }
 
@@ -122,9 +125,20 @@ private:
         clsManageUsersScreen::ShowManageUsersMenu();
     }
 
-    static void _ShowEndScreen()
+    static void _ShowLoginRegisterScreen()
     {
-        cout << "\nEnd Screen Will be Here....\n";
+        // cout << "\nRegister Login Will be Here....\n";
+        clsLoginRegisterScreen::ShowLoginRegisterList();
+    }
+
+    static void _Logout()
+    {
+        ActiveUser = clsUser::Find("", "");
+        /*
+        this function is doing noting but returns to the main
+        so before going to the main we access the ActiveUser Object
+        and make it empty again and ready for the next login
+        */
     }
 
     static void _PerformMainMenuOption(enManageUsersMenuOption MainMenuOption)
@@ -173,9 +187,15 @@ private:
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eExit:
+        case enManageUsersMenuOption::eLoginRegister:
             _ClearScreen();
-            _ShowEndScreen();
+            _ShowLoginRegisterScreen();
+            _GoBackToMainMenu();
+            break;
+
+        case enManageUsersMenuOption::eLogout:
+            _ClearScreen();
+            _Logout();
             break;
         }
     }
@@ -198,14 +218,15 @@ public:
             cout << setw(37) << left << "" << "\t[5] Find Client.\n";
             cout << setw(37) << left << "" << "\t[6] Transactions.\n";
             cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-            cout << setw(37) << left << "" << "\t[8] Exit.\n";
+            cout << setw(37) << left << "" << "\t[8] Login Register.\n";
+            cout << setw(37) << left << "" << "\t[9] Logout.\n";
             cout << setw(37) << left << "" << "============================================\n";
 
             enManageUsersMenuOption Choice = (enManageUsersMenuOption)_ReadMainMenuOption(); // Reads Users choice
-            if (Choice == eExit)
+            if (Choice == eLogout)
             {
                 _ClearScreen();
-                _ShowEndScreen();
+                _Logout();
                 Exit = true; // modify the loop variable value to get out and close
             }
             else
