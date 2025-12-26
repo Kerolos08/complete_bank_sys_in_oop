@@ -305,4 +305,19 @@ public:
             return true;
         }
     }
+
+    bool Transfare(double Amount, clsBankClient &DestinationClient)
+    {
+        if (Amount > _AccountBalance)
+        {
+            return false;
+        }
+        else
+        {
+            // Any transfer is a withdraw from the source and deposite for the Destination
+            Withdraw(Amount);
+            DestinationClient.Depostie(Amount);
+            return true;
+        }
+    }
 };

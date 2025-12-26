@@ -72,7 +72,7 @@ private:
             Permissions += clsUser::eMainMenuPermissions::pManageUsers;
         }
 
-        cout << "\nLogin Register? y/n? ";
+        cout << "\nShow Login Register? y/n? ";
         cin >> Answer;
         if (Answer == 'Y' || Answer == 'y')
         {
