@@ -26,7 +26,7 @@ public:
         if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pListClients))
         {
             return;
-            // printing Access Denied and returning to main menu without doing nothing.
+            // printing Access Denied and returning to main menu without doing anything.
         }
 
         vector<clsBankClient> vClients = clsBankClient::GetClientsList();

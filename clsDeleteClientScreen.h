@@ -39,7 +39,7 @@ public:
         if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pDeleteClient))
         {
             return;
-            // printing Access Denied and returning to main menu without doing nothing.
+            // printing Access Denied and returning to main menu without doing anything.
         }
 
         clsScreen::_DrawScreenHeader("\t  Delete Client Screen");

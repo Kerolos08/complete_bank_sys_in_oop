@@ -40,7 +40,7 @@ public:
         if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pFindClient))
         {
             return;
-            // printing Access Denied and returning to main menu without doing nothing.
+            // printing Access Denied and returning to main menu without doing anything.
         }
 
         _DrawScreenHeader("\t      Find Client");

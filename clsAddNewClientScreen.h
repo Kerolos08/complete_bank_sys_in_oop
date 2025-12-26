@@ -61,7 +61,7 @@ public:
         if (!_CheckAccessRights(clsUser::eMainMenuPermissions::pAddNewClient))
         {
             return;
-            // printing Access Denied and returning to main menu without doing nothing.
+            // printing Access Denied and returning to main menu without doing anything.
         }
 
         clsScreen::_DrawScreenHeader("\tAdd New Client Screen");

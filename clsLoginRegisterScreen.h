@@ -24,7 +24,7 @@ public:
         if (!_CheckAccessRights(clsUser::eMainMenuPermissions::PLoginRegister))
         {
             return;
-            // printing Access Denied and returning to main menu without doing nothing.
+            // printing Access Denied and returning to main menu without doing anything.
         }
 
         vector<clsUser::stLoginRegisterRecord> vRegisterRecords = clsUser::GetLoginRegisterList();
