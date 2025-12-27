@@ -30,7 +30,7 @@ public:
         vector<clsUser::stLoginRegisterRecord> vRegisterRecords = clsUser::GetLoginRegisterList();
 
         string Title = "\t  Login Register List Screen";
-        string SubTitle = "\t      (" + to_string(vRegisterRecords.size()) + ") Record(s).";
+        string SubTitle = "\t\t    (" + to_string(vRegisterRecords.size()) + ") Record(s).";
         _DrawScreenHeader(Title, SubTitle); // from the inhereted lib clsScreen Super Class
 
         cout << setw(8) << left << "" << "\n\t-----------------------------------------------------------";

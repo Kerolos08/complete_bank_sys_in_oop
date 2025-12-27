@@ -11,6 +11,10 @@ using namespace std;
 
 class clsBankClient : public clsPerson
 {
+public:
+    // to avoid the undefined structure issue
+    struct stTransferLogRecord;
+
 private:
     enum enMode
     {
@@ -141,7 +145,32 @@ private:
         }
     }
 
+    static stTransferLogRecord _ConvertTransferRegisterLineToRecord(const string &Line, const string &Delim = "#//#")
+    {
+        stTransferLogRecord Record;
+        vector<string> vOperation = clsString::SplitString(Line, Delim);
+        Record.TimeStamp = vOperation.at(0);
+        Record.SourceAccountNumber = vOperation.at(1);
+        Record.DestinationAccountNumber = vOperation.at(2);
+        Record.Amount = stod(vOperation.at(3));
+        Record.SourceBalance = stod(vOperation.at(4));
+        Record.DestinationBalance = stod(vOperation.at(5));
+        Record.Username = vOperation.at(6);
+        return Record;
+    }
+
 public:
+    struct stTransferLogRecord
+    {
+        string TimeStamp;
+        string SourceAccountNumber;
+        string DestinationAccountNumber;
+        double Amount;
+        double SourceBalance;
+        double DestinationBalance;
+        string Username;
+    };
+
     clsBankClient(enMode Mode, const string &FirstName, const string &LastName, const string &Email, const string &PhoneNumber, const string &AccountNumber, const string &Pincode, double AccountBalance) : clsPerson(FirstName, LastName, Email, PhoneNumber)
     {
         // Parameterized constructor
@@ -348,5 +377,24 @@ public:
             _RegisterTranferLog(DestinationClient, Amount, Username);
             return true;
         }
+    }
+
+    static vector<stTransferLogRecord> GetTransferRegisterList()
+    {
+        vector<stTransferLogRecord> vTransfers;
+        fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::in); // Read only
+        if (MyFile.is_open())
+        {
+            string Line;
+            stTransferLogRecord Record;
+            while (getline(MyFile, Line))
+            {
+                Record = _ConvertTransferRegisterLineToRecord(Line);
+                vTransfers.push_back(Record);
+            }
+            MyFile.close();
+        }
+        return vTransfers;
     }
 };

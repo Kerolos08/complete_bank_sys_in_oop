@@ -8,6 +8,7 @@
 #include "clsWithdrawScreen.h"
 #include "clsTotalBalancesScreen.h"
 #include "clsTransferScreen.h"
+#include "clsTransferRegisterScreen.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -28,9 +29,10 @@ private:
         // Transaction menu elements.
         eDeposite = 1,
         eWithdraw = 2,
-        eTransfer = 3,
-        eTotalBalances = 4,
-        eShowMainMenu = 5
+        eTotalBalances = 3,
+        eTransfer = 4,
+        eTransferRegister = 5,
+        eShowMainMenu = 6
     };
 
     // cross platform Pause/clear functions
@@ -64,8 +66,8 @@ private:
     static short _ReadTransactionMenuOption()
     {
         // Reading short number to be casted to enTransactionMenuOption type.
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 5]? ";
-        short Choice = clsInputValidate::ReadshortNumberbetween(1, 5, "Enter a number between 1 and 5? ");
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 6]? ";
+        short Choice = clsInputValidate::ReadshortNumberbetween(1, 6, "Enter a number between 1 and 6? ");
         return Choice;
     }
 
@@ -92,6 +94,11 @@ private:
         clsTotalBalancesScreen::ShowTotalBalancesScreen();
     }
 
+    static void _ShowTransferRegisterScreen()
+    {
+        clsTransferRegisterScreen::ShowTransferRegisterList();
+    }
+
     static void _GoBackToTransactionMenu()
     {
         cout << setw(37) << left << "" << "\n\tPress any key to go back to transaction menu.....\n";
@@ -115,15 +122,21 @@ private:
             _GoBackToTransactionMenu();
             break;
 
+        case enTransactionMenuOption::eTotalBalances:
+            _ClearScreen();
+            _ShowTotalBalancesScreen();
+            _GoBackToTransactionMenu();
+            break;
+
         case enTransactionMenuOption::eTransfer:
             _ClearScreen();
             _ShowTransferScreen();
             _GoBackToTransactionMenu();
             break;
 
-        case enTransactionMenuOption::eTotalBalances:
+        case enTransactionMenuOption::eTransferRegister:
             _ClearScreen();
-            _ShowTotalBalancesScreen();
+            _ShowTransferRegisterScreen();
             _GoBackToTransactionMenu();
             break;
 
@@ -153,9 +166,10 @@ public:
             cout << setw(37) << left << "" << "============================================\n";
             cout << setw(37) << left << "" << "\t[1] Deposite.\n";
             cout << setw(37) << left << "" << "\t[2] Withdraw.\n";
-            cout << setw(37) << left << "" << "\t[3] Transfer.\n";
-            cout << setw(37) << left << "" << "\t[4] Total Balances.\n";
-            cout << setw(37) << left << "" << "\t[5] Main Menu.\n";
+            cout << setw(37) << left << "" << "\t[3] Total Balances.\n";
+            cout << setw(37) << left << "" << "\t[4] Transfer.\n";
+            cout << setw(37) << left << "" << "\t[5] Transfer Log.\n";
+            cout << setw(37) << left << "" << "\t[6] Main Menu.\n";
             cout << setw(37) << left << "" << "============================================\n";
 
             enTransactionMenuOption Option = (enTransactionMenuOption)_ReadTransactionMenuOption();
