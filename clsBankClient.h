@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "clsDate.h"
+#include "clsTime.h"
 #include "clsString.h"
 #include "clsPerson.h"
 using namespace std;
@@ -111,6 +113,32 @@ private:
     void _AddNewCleint()
     {
         _AddNewDataLineToFile(_ConvertClientObjectToLine(*this));
+    }
+
+    string _PrepareTransferLogRecord(const clsBankClient &DestinationClient, double Amount, const string &Username, const string &Delim = "#//#")
+    {
+        string stTransferLogline = "";
+        stTransferLogline += clsDate::DateToString(clsDate()) + " - " + clsTime::TimeToString(clsTime()) + Delim;
+        stTransferLogline += Get_AccountNumber() + Delim;
+        stTransferLogline += DestinationClient.Get_AccountNumber() + Delim;
+        stTransferLogline += to_string(Amount) + Delim;
+        stTransferLogline += to_string(Get_AccountBalance()) + Delim;
+        stTransferLogline += to_string(DestinationClient.Get_AccountBalance()) + Delim;
+        stTransferLogline += ActiveUser.Get_Username();
+        return stTransferLogline;
+    }
+
+    void _RegisterTranferLog(const clsBankClient &DestinationClient, double Amount, const string &Username)
+    {
+        // Writing the the prepared record line to transfer log file
+        string stTransferLogline = _PrepareTransferLogRecord(DestinationClient, Amount, Username);
+        fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::out | ios::app);
+        if (MyFile.is_open())
+        {
+            MyFile << stTransferLogline << endl;
+            MyFile.close();
+        }
     }
 
 public:
@@ -306,7 +334,7 @@ public:
         }
     }
 
-    bool Transfare(double Amount, clsBankClient &DestinationClient)
+    bool Transfare(double Amount, clsBankClient &DestinationClient, const string &Username)
     {
         if (Amount > _AccountBalance)
         {
@@ -317,6 +345,7 @@ public:
             // Any transfer is a withdraw from the source and deposite for the Destination
             Withdraw(Amount);
             DestinationClient.Depostie(Amount);
+            _RegisterTranferLog(DestinationClient, Amount, Username);
             return true;
         }
     }

@@ -76,7 +76,7 @@ public:
 
         if (AreYouSure == 'Y' || AreYouSure == 'y')
         {
-            if (SourceClient.Transfare(Amount, DestinationClient))
+            if (SourceClient.Transfare(Amount, DestinationClient, ActiveUser.Get_Username()))
             {
                 cout << "\nTransfer done successfully.\n";
                 _PrintClientMiniCard(SourceClient);

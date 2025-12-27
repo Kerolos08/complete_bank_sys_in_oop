@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "clsDate.h"
 #include "clsTime.h"
 #include "clsString.h"
-#include <vector>
 #include "clsPerson.h"
 
 using namespace std;
@@ -70,16 +70,6 @@ private:
         return vUsers;
     }
 
-    string _PrepareLoginRecord(const string &Delim = "#//#")
-    {
-        string stRegisteryline = "";
-        stRegisteryline += clsDate::DateToString(clsDate()) + " - " + clsTime::TimeToString(clsTime()) + Delim;
-        stRegisteryline += Get_Username() + Delim;
-        stRegisteryline += Get_Password() + Delim;
-        stRegisteryline += to_string(Get_Permissions());
-        return stRegisteryline;
-    }
-
     static string _ConvertUserObjectToLine(const clsUser &User, const string &Delim = "#//#")
     {
         string stUserLine = "";
@@ -137,6 +127,16 @@ private:
     void _AddNewUser()
     {
         _AddNewDataLineToFile(_ConvertUserObjectToLine(*this));
+    }
+
+    string _PrepareLoginRecord(const string &Delim = "#//#")
+    {
+        string stRegisteryline = "";
+        stRegisteryline += clsDate::DateToString(clsDate()) + " - " + clsTime::TimeToString(clsTime()) + Delim;
+        stRegisteryline += Get_Username() + Delim;
+        stRegisteryline += Get_Password() + Delim;
+        stRegisteryline += to_string(Get_Permissions());
+        return stRegisteryline;
     }
 
 public:
