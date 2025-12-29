@@ -11,6 +11,7 @@
 #include "clsTransactionsScreen.h"
 #include "clsManageUsersScreen.h"
 #include "clsLoginRegisterScreen.h"
+#include "clsCurrencyExchangeMainScreen.h"
 #include "Global.h"
 
 // cross platform Libs. for Pause/Clear
@@ -27,7 +28,7 @@ using namespace std;
 class clsMainScreen : protected clsScreen
 {
 private:
-    enum enManageUsersMenuOption
+    enum enMainMenuOption
     {
         eListClient = 1,
         eAddNewClient = 2,
@@ -37,7 +38,8 @@ private:
         eTransactions = 6,
         eManageUsers = 7,
         eLoginRegister = 8,
-        eLogout = 9
+        eCurrencyExchange = 9,
+        eLogout = 10
     };
 
     // cross platform Pause/clear
@@ -71,8 +73,8 @@ private:
     static short _ReadMainMenuOption()
     {
         // uses a function to make the user only can input between the Menu range
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 9]? ";
-        short Choice = clsInputValidate::ReadshortNumberbetween(1, 9, "Enter a number between 1 and 9? ");
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 10]? ";
+        short Choice = clsInputValidate::ReadshortNumberbetween(1, 10, "Enter a number between 1 and 10? ");
         return Choice;
     }
 
@@ -125,6 +127,12 @@ private:
         clsManageUsersScreen::ShowManageUsersMenu();
     }
 
+    static void _ShowCurrencyExchangeMenu()
+    {
+        // cout << "\nCurrancy Exchange Menu Will be Here....\n";
+        clsCurrencyExchangeMainScreen::ShowCurrencyExchangeMenu();
+    }
+
     static void _ShowLoginRegisterScreen()
     {
         // cout << "\nRegister Login Will be Here....\n";
@@ -141,59 +149,65 @@ private:
         */
     }
 
-    static void _PerformMainMenuOption(enManageUsersMenuOption MainMenuOption)
+    static void _PerformMainMenuOption(enMainMenuOption MainMenuOption)
     {
         switch (MainMenuOption)
         {
-        case enManageUsersMenuOption::eListClient:
+        case enMainMenuOption::eListClient:
             _ClearScreen();
             _ShowAllClientsScreen();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eAddNewClient:
+        case enMainMenuOption::eAddNewClient:
             _ClearScreen();
             _ShowAddClientScreen();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eDeletClient:
+        case enMainMenuOption::eDeletClient:
             _ClearScreen();
             _ShowDeleteClientScreen();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eUpdateClient:
+        case enMainMenuOption::eUpdateClient:
             _ClearScreen();
             _ShowUpdateClientScreen();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eFindClient:
+        case enMainMenuOption::eFindClient:
             _ClearScreen();
             _ShowFindClientScreen();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eTransactions:
+        case enMainMenuOption::eTransactions:
             _ClearScreen();
             _ShowTransActionMenu();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eManageUsers:
+        case enMainMenuOption::eManageUsers:
             _ClearScreen();
             _ShowManageUsersMenu();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eLoginRegister:
+        case enMainMenuOption::eLoginRegister:
             _ClearScreen();
             _ShowLoginRegisterScreen();
             _GoBackToMainMenu();
             break;
 
-        case enManageUsersMenuOption::eLogout:
+        case enMainMenuOption::eCurrencyExchange:
+            _ClearScreen();
+            _ShowCurrencyExchangeMenu();
+            _GoBackToMainMenu();
+            break;
+
+        case enMainMenuOption::eLogout:
             _ClearScreen();
             _Logout();
             break;
@@ -219,10 +233,11 @@ public:
             cout << setw(37) << left << "" << "\t[6] Transactions.\n";
             cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
             cout << setw(37) << left << "" << "\t[8] Login Register.\n";
-            cout << setw(37) << left << "" << "\t[9] Logout.\n";
+            cout << setw(37) << left << "" << "\t[9] Currancy Exchange.\n";
+            cout << setw(37) << left << "" << "\t[10] Logout.\n";
             cout << setw(37) << left << "" << "============================================\n";
 
-            enManageUsersMenuOption Choice = (enManageUsersMenuOption)_ReadMainMenuOption(); // Reads Users choice
+            enMainMenuOption Choice = (enMainMenuOption)_ReadMainMenuOption(); // Reads Users choice
             if (Choice == eLogout)
             {
                 _ClearScreen();
