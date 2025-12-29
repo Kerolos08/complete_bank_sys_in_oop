@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "clsUtil.h"
 #include "clsDate.h"
 #include "clsTime.h"
 #include "clsString.h"
@@ -28,22 +29,11 @@ private:
     string _Password;
     int _Permissions;
 
-    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(const string &Line, const string &Delim = "#//#")
-    {
-        stLoginRegisterRecord Record;
-        vector<string> vSession = clsString::SplitString(Line, Delim);
-        Record.TimeStamp = vSession.at(0);
-        Record.Username = vSession.at(1);
-        Record.Password = vSession.at(2);
-        Record.Permissions = stoi(vSession.at(3));
-        return Record;
-    }
-
     static clsUser _ConvertLineToUserObject(const string &Line, const string &Delim = "#//#")
     {
         vector<string> vUser;
         vUser = clsString::SplitString(Line, Delim);
-        return clsUser(enMode::UpdateMode, vUser[0], vUser[1], vUser[2], vUser[3], vUser[4], vUser[5], stoi(vUser[6]));
+        return clsUser(enMode::UpdateMode, vUser[0], vUser[1], vUser[2], vUser[3], vUser[4], clsUtil::DecryptionText(vUser[5]), stoi(vUser[6]));
         // as the imported client is exists in file it is imported with update mode.
     }
 
@@ -78,7 +68,8 @@ private:
         stUserLine += User.Get_Email() + Delim;
         stUserLine += User.Get_Phone() + Delim;
         stUserLine += User.Get_Username() + Delim;
-        stUserLine += User.Get_Password() + Delim;
+        // Storing the Encrypted password not the real one
+        stUserLine += clsUtil::EncryptText(User.Get_Password() + Delim);
         stUserLine += to_string(User.Get_Permissions());
         return stUserLine;
     }
@@ -134,9 +125,20 @@ private:
         string stRegisteryline = "";
         stRegisteryline += clsDate::DateToString(clsDate()) + " - " + clsTime::TimeToString(clsTime()) + Delim;
         stRegisteryline += Get_Username() + Delim;
-        stRegisteryline += Get_Password() + Delim;
+        stRegisteryline += clsUtil::EncryptText(Get_Password()) + Delim;
         stRegisteryline += to_string(Get_Permissions());
         return stRegisteryline;
+    }
+
+    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(const string &Line, const string &Delim = "#//#")
+    {
+        stLoginRegisterRecord Record;
+        vector<string> vSession = clsString::SplitString(Line, Delim);
+        Record.TimeStamp = vSession.at(0);
+        Record.Username = vSession.at(1);
+        Record.Password = vSession.at(2);
+        Record.Permissions = stoi(vSession.at(3));
+        return Record;
     }
 
 public:
