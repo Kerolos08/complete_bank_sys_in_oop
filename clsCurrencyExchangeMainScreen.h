@@ -3,6 +3,7 @@
 #include <iomanip>
 #include "clsInputValidate.h"
 #include "clsScreen.h"
+#include "clsCurrtenciesListScreen.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -72,7 +73,8 @@ private:
 
     static void _ShowListCurrenciesScreen()
     {
-        cout << "\nCurrencies List Will be Here....\n";
+        // cout << "\nCurrencies List Will be Here....\n";
+        clsCurrenciesListScreen::ShowCurrenciesList();
     }
 
     static void _ShowFindCurrencyScreen()
@@ -139,7 +141,7 @@ public:
         while (!ReturnToMainMenu)
         {
             _ClearScreen();
-            _DrawScreenHeader("\t  Currency Exchange Main Screen");
+            _DrawScreenHeader("   Currency Exchange Main Screen");
             cout << setw(37) << left << "" << "============================================\n";
             cout << setw(37) << left << "" << "\t\t  Currency Exchange Menu\n";
             cout << setw(37) << left << "" << "============================================\n";
