@@ -4,6 +4,7 @@
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsCurrtenciesListScreen.h"
+#include "clsFindCurrencyScreen.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -79,7 +80,8 @@ private:
 
     static void _ShowFindCurrencyScreen()
     {
-        cout << "\nFind Currency Screen Will be Here....\n";
+        // cout << "\nFind Currency Screen Will be Here....\n";
+        clsFindCurrencyScreen::ShowFindCurrencyScreen();
     }
 
     static void _ShowUpdateCurrencyRateScreen()

@@ -47,7 +47,7 @@ private:
 
     static clsCurrency _GetEmptyCurrencyObject()
     {
-        return clsCurrency(enMode::UpdateMode, "", "", "", 0);
+        return clsCurrency(enMode::EmptyMode, "", "", "", 0);
     }
 
     string _ConvertCurrencyObjectToDataLine(const clsCurrency &Currency, const string &Delim = "#//#")
@@ -134,7 +134,7 @@ public:
         return _Mode == enMode::EmptyMode;
     }
 
-    static clsCurrency FindByCode(const string &CountryCode)
+    static clsCurrency FindByCode(const string &CurrencyCode)
     {
         fstream MyFile;
         MyFile.open("Currencies.txt", ios::in); // Read mode
@@ -144,7 +144,7 @@ public:
             while (getline(MyFile, Line))
             {
                 clsCurrency Currency = _ConvertLinetoCurrencyObject(Line);
-                if (Currency.CurrencyCode() == clsString::UpperAllLetter(CountryCode))
+                if (Currency.CurrencyCode() == clsString::UpperAllLetter(CurrencyCode))
                 {
                     MyFile.close();
                     return Currency;

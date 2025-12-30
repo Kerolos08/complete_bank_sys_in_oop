@@ -16,7 +16,7 @@ static void _PrintCurrency(const clsCurrency &Currency)
 
 int main()
 {
-    clsCurrency Currency1 = Currency1.FindByCode("jod");
+    clsCurrency Currency1 = clsCurrency::FindByCode("jod");
 
     if (Currency1.IsEmpty())
     {
