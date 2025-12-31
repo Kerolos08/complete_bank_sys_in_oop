@@ -6,6 +6,7 @@
 #include "clsCurrtenciesListScreen.h"
 #include "clsFindCurrencyScreen.h"
 #include "clsUpdateCurrencyRateScreen.h"
+#include "clsCurrencyCalculatorScreen.h"
 
 // cross platform Libs. for Pause/Clear
 #ifdef _WIN32
@@ -93,7 +94,8 @@ private:
 
     static void _ShowCurrencyCalculatorScreen()
     {
-        cout << "\nCurrency Calculator Screen Will be Here....\n";
+        // cout << "\nCurrency Calculator Screen Will be Here....\n";
+        clsCurrencyCalculatorScreen::ShowCurrencyCalculatorScreen();
     }
 
     static void _PerformManageUsersMenuOption(enCurrencyExchangeMenuOption CurrencyExchangeOption)
