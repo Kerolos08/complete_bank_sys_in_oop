@@ -66,6 +66,7 @@ public:
 
         clsScreen::_DrawScreenHeader("\tAdd New Client Screen");
         string AccountNumber = _ReadAccountNumber();
+        while (clsBankClient::IsClientExist(AccountNumber))
         {
             cout << "\nClient with this Account Number is Already Exists, Please Enter another one: ";
             AccountNumber = clsInputValidate::ReadString();
