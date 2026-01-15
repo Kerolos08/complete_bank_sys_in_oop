@@ -1,0 +1,94 @@
+# Compiled binaries
+BankSystem
+*.exe
+*.out
+*.app
+a.out
+
+# Object files
+*.o
+*.obj
+*.ko
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Runtime generated data files (IMPORTANT!)
+Clients.txt
+Users.txt
+LoginRegister.txt
+TransferLog.txt
+# Keep the Currencies.txt as it's template data
+# Currencies.txt
+
+# Build directories
+build/
+bin/
+obj/
+out/
+
+# IDE and Editor files
+.vscode/
+.vs/
+.idea/
+*.swp
+*.swo
+*~
+*.user
+*.suo
+*.ncb
+*.aps
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.opendb
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# Backup files
+*.bak
+*.backup
+*.old
