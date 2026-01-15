@@ -48,8 +48,8 @@ This educational project demonstrates Object-Oriented Programming concepts in C+
 
 ```bash
 # Clone the repository
-git clone https://github.com/Kerolos08/bank-management-system-cpp.git
-cd bank-management-system-cpp
+git clone https://github.com/Kerolos08/complete_bank_sys_in_oop
+cd complete_bank_sys_in_oop
 
 # Compile
 make
