@@ -1,4 +1,6 @@
+############################
 # Compiled binaries
+############################
 BankSystem
 ConsoleApp
 *.exe
@@ -6,42 +8,56 @@ ConsoleApp
 *.app
 a.out
 
+############################
 # Object files
+############################
 *.o
 *.obj
 *.ko
 *.elf
 
+############################
 # Linker output
+############################
 *.ilk
 *.map
 *.exp
 
+############################
 # Libraries
+############################
 *.lib
 *.a
 *.la
 *.lo
 
+############################
 # Shared objects
+############################
 *.dll
 *.so
 *.so.*
 *.dylib
 
+############################
 # Debug files
+############################
 *.dSYM/
 *.su
 *.idb
 *.pdb
 
+############################
 # Build directories
+############################
 build/
 bin/
 obj/
 out/
 
-# IDE and Editor files
+############################
+# IDE / Editor files
+############################
 .vscode/
 .vs/
 .idea/
@@ -58,6 +74,9 @@ out/
 *.VC.db
 *.VC.opendb
 
+############################
+# OS files
+############################
 # macOS
 .DS_Store
 .AppleDouble
@@ -71,7 +90,9 @@ Desktop.ini
 # Linux
 *~
 
+############################
 # CMake
+############################
 CMakeCache.txt
 CMakeFiles/
 CMakeScripts/
@@ -81,14 +102,26 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+############################
 # Backup files
+############################
 *.bak
 *.backup
 *.old
 
-# (allows demo data in data/ folder)
-/Clients.txt
-/Users.txt
-/LoginRegister.txt
-/TransferLog.txt
-/Currencies.txt
+############################
+# Runtime-generated data (IMPORTANT)
+############################
+# These files are created/modified when the program runs
+# They should NOT be committed
+data/LoginRegister.txt
+data/TransferLog.txt
+
+############################
+# Demo data (INTENTIONALLY TRACKED)
+############################
+# data/Clients.txt
+# data/Users.txt
+# data/Currencies.txt
+# (no ignore rules here on purpose)
+
