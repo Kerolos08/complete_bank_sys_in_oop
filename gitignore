@@ -1,5 +1,6 @@
 # Compiled binaries
 BankSystem
+ConsoleApp
 *.exe
 *.out
 *.app
@@ -33,14 +34,6 @@ a.out
 *.su
 *.idb
 *.pdb
-
-# Runtime generated data files (IMPORTANT!)
-Clients.txt
-Users.txt
-LoginRegister.txt
-TransferLog.txt
-# Keep the Currencies.txt as it's template data
-# Currencies.txt
 
 # Build directories
 build/
@@ -83,7 +76,7 @@ CMakeCache.txt
 CMakeFiles/
 CMakeScripts/
 cmake_install.cmake
-install_manifest.txt
+install_manifest.cmake
 compile_commands.json
 CTestTestfile.cmake
 _deps
@@ -92,3 +85,10 @@ _deps
 *.bak
 *.backup
 *.old
+
+# (allows demo data in data/ folder)
+/Clients.txt
+/Users.txt
+/LoginRegister.txt
+/TransferLog.txt
+/Currencies.txt
