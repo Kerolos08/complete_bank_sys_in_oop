@@ -114,7 +114,9 @@ Website: [programmingadvices.com](https://programmingadvices.com)
 MIT License - Free to use for learning
 
 ## 👨‍💻 Author
-
-Created by [@Kerolos08](https://github.com/Kerolos08) as part of the Programming Advices course
+**Kerolos Hany**
+* 💼 [LinkedIn](https://www.linkedin.com/in/kerolos08/)
+* 🐙 [GitHub](https://github.com/Kerolos08)
+* ✉️ Email: [kerolosxj0@gmail.com](kerolosxj0@gmail.com)
 
 ---
