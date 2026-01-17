@@ -69,7 +69,7 @@ private:
         stUserLine += User.Get_Phone() + Delim;
         stUserLine += User.Get_Username() + Delim;
         // Storing the Encrypted password not the real one
-        stUserLine += clsUtil::EncryptText(User.Get_Password() + Delim);
+        stUserLine += clsUtil::EncryptText(User.Get_Password()) + Delim;
         stUserLine += to_string(User.Get_Permissions());
         return stUserLine;
     }
